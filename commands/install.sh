@@ -25,6 +25,8 @@ install_version() {
 
 	EXTRACTED_FILE=$(find "$version_dir" -maxdepth 1 -type f -printf "%T@ %p\n" | sort -n | tail -n1 | cut -d' ' -f2-)
 
+	download_godot_icon
+
 	chmod +x "$EXTRACTED_FILE"
 	mkdir -p ~/.local/share/applications
 
@@ -43,4 +45,25 @@ Terminal=false
 EOF
 
 	echo "Godot Engine $version was successfully installed"
+}
+
+download_godot_icon() {
+	local url="https://godotengine.org/assets/press/icon_color.png"
+	local target_dir="$HOME/.local/share/icons"
+	local target_path="$target_dir/godot.png"
+
+	mkdir -p "$target_dir"
+
+	if [[ -f "$target_path" ]]; then
+		echo "Icon already exists at: $target_path"
+		return 0
+	fi
+
+	if ! command -v curl >/dev/null; then
+		echo "Error: curl is required but not installed." >&2
+		return 1
+	fi
+
+	curl -L "$url" -o "$target_path" &&
+		echo "Icon downloaded to: $target_path"
 }
