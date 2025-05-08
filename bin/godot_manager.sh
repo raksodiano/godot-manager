@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Cargamos los comandos y utilidades
 source "$(dirname "$0")/../lib/config.sh"
 source "$(dirname "$0")/../lib/utils.sh"
 source "$(dirname "$0")/../commands/list.sh"
@@ -7,6 +8,7 @@ source "$(dirname "$0")/../commands/download.sh"
 source "$(dirname "$0")/../commands/remove.sh"
 source "$(dirname "$0")/../commands/install.sh"
 
+# Preparamos las diferente opciones
 while getopts "l o: d: i: r:" opt; do
 	case "$opt" in
 	l)

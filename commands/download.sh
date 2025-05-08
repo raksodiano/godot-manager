@@ -34,7 +34,7 @@ download_version() {
 		return 0
 	fi
 
-	# Proceso
+	# Indicamos el proceso
 	echo "Descargando Godot ${version}"
 	echo "URL verificada: ${url}"
 	echo "Destino: ${full_path}"
